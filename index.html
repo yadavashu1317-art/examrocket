@@ -1,19 +1,18 @@
+ठीक है। पूरा कोड यहीं दे रहा हूँ। इसे तीन हिस्सों में रख रहा हूँ ताकि कॉपी करने में आसानी हो। **तीनों हिस्सों को क्रम से जोड़कर एक ही `index.html` फाइल में रखना है।**
 
+**पहला हिस्सा — HTML और डिजाइन**
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
- <title>ExamRocket - Online Test Series for Classes 1-12</title>
-
-<meta name="description" content="ExamRocket is an online examination platform for students of classes 1 to 12. Practice tests, MCQs and instant results.">
-
-<meta name="keywords" content="ExamRocket, Online Test, Mock Test, Class 1 to 12, MCQ Test, Online Exam">
-
-<meta name="robots" content="index, follow">
- 
- <meta name="google-site-verification" content="qJUxG62_I69EvjnF6nWpR61RM_0kAypOtL6-lSEZj5s" />
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ExamRocket | Online Test Platform</title>
+<meta name="description" content="ExamRocket is an online examination platform for students of classes 1 to 12. Practice tests, MCQs and instant results.">
+<meta name="keywords" content="ExamRocket, Online Test, Mock Test, Class 1 to 12, MCQ Test, Online Exam">
+<meta name="robots" content="index, follow">
+<meta name="google-site-verification" content="qJUxG62_I69EvjnF6nWpR61RM_0kAypOtL6-lSEZj5s">
 
 <style>
 *{box-sizing:border-box}
@@ -21,7 +20,7 @@ body{margin:0;font-family:Arial,sans-serif;background:#f1f4fb;color:#17213b}
 header{background:#101b3f;color:white;padding:18px 5%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap}
 header h2{margin:0;color:#64e4f0}
 nav{display:flex;gap:12px;flex-wrap:wrap}
-button{border:0;padding:11px 17px;border-radius:8px;background:#4169f5;color:white;cursor:pointer;font-weight:bold}
+button{border:0;padding:11px 17px;border-radius:8px;background:#4169f5;color:white;cursor:pointer;font-weight:bold;margin:3px}
 button:hover{opacity:.88}
 input,select,textarea{width:100%;padding:12px;margin:7px 0 14px;border:1px solid #ccd3e2;border-radius:7px;font-size:15px}
 textarea{min-height:85px}
@@ -36,15 +35,16 @@ label{font-weight:bold}
 .question{border:1px solid #e1e5ef;padding:15px;margin:15px 0;border-radius:10px}
 .option{display:block;margin:10px 0;font-weight:normal}
 #message{padding:12px;border-radius:8px;margin:12px 0;background:#e7f5ff}
-.badge{background:#e8efff;color:#2448a8;padding:5px 9px;border-radius:20px}
 table{width:100%;border-collapse:collapse}
 td,th{padding:10px;border-bottom:1px solid #ddd;text-align:left}
+footer{background:#172554;color:white;text-align:center;padding:25px;margin-top:30px}
+footer a{color:white}
 @media(max-width:600px){header{gap:15px}.hero h1{font-size:30px}.card{padding:16px}}
 </style>
 </head>
-
 <body>
-  <header>
+
+<header>
  <h2>🚀 ExamRocket</h2>
  <nav>
   <button onclick="showHome()">Home</button>
@@ -56,87 +56,55 @@ td,th{padding:10px;border-bottom:1px solid #ddd;text-align:left}
 </header>
 
 <div class="container">
-
 <div id="message" class="hidden"></div>
 
-<!-- HOME -->
 <section id="home">
  <div class="hero">
   <h1>EXAMROCKET 🚀</h1>
   <h2>Learn • Practice • Achieve</h2>
   <p>Online Examination and Learning Platform</p>
   <button onclick="showAuth('student')">Student Login / Sign Up</button>
-  <button onclick="showAuth('teacher')">Teacher Login</button>
+  <button onclick="showAuth('teacher')">Teacher Login / Registration</button>
   <button onclick="showAuth('admin')">Office Login</button>
  </div>
-
- <div class="grid">
- <div class="card" style="text-align:center; padding:25px;">
+ <div class="card" style="text-align:center">
   <h2>Our Vision</h2>
-
-  <p>
-    Our vision is to make quality education accessible to every student
-    through technology, innovation, and equal learning opportunities.
-  </p>
-
-  <p>
-    We aim to build a trusted digital learning platform where students
-    can improve their knowledge, practice through online tests,
-    and achieve academic excellence.
-  </p>
-
-  <p>
-    We believe that every learner deserves the opportunity
-    to learn, grow, and succeed.
-  </p>
-
+  <p>Our vision is to make quality education accessible to every student through technology, innovation, and equal learning opportunities.</p>
+  <p>We aim to build a trusted digital learning platform where students can improve their knowledge, practice through online tests, and achieve academic excellence.</p>
+  <p>We believe that every learner deserves the opportunity to learn, grow, and succeed.</p>
   <h3>ExamRocket – Learn, Practice & Succeed.</h3>
-</div>
  </div>
 </section>
 
-<!-- AUTH -->
 <section id="auth" class="hidden">
- <div class="card admin-only hidden">
+ <div class="card">
   <h2 id="authTitle">Login</h2>
   <div id="signupFields" class="hidden">
    <label>Full Name</label>
    <input id="signupName" placeholder="Your full name">
   </div>
-
-  <label>Email / Login ID</label>
+  <label>Email</label>
   <input id="email" type="email" placeholder="Enter registered email">
-
   <label>Password</label>
-  <input id="password" type="password" placeholder="Password">
-
+  <input id="password" type="password" placeholder="Password (minimum 6 characters)">
   <div id="signupControls" class="hidden">
-   <button onclick="signupStudent()">Create Student Account</button>
+   <button id="signupButton" onclick="registerAccount()">Create Account</button>
   </div>
-
   <button onclick="login()">Sign In</button>
-  <p id="studentSignupLink" class="small">
-   New student? <a href="#" onclick="showSignup()">Create account</a>
-  </p>
+  <p id="studentSignupLink" class="small">New student? <a href="#" onclick="showSignup();return false;">Create account</a></p>
+  <p id="teacherSignupLink" class="small hidden">Teacher invited by Admin? <a href="#" onclick="showSignup();return false;">Complete teacher registration</a></p>
   <button onclick="showHome()" style="background:#68738b">Back</button>
  </div>
 </section>
 
-<!-- STUDENT DASHBOARD -->
 <section id="studentDashboard" class="hidden">
  <div class="card">
-  <h2>🎓 Student Dashboard</h2>
-  <p id="studentWelcome"></p>
-  <h3>Available Tests</h3>
-  <div id="availableTests">Loading tests...</div>
+  <h2>🎓 Student Dashboard</h2><p id="studentWelcome"></p>
+  <h3>Available Tests</h3><div id="availableTests">Loading tests...</div>
  </div>
- <div class="card">
-  <h3>My Results</h3>
-  <div id="myResults"></div>
- </div>
+ <div class="card"><h3>My Results</h3><div id="myResults"></div></div>
 </section>
 
-<!-- TEST ATTEMPT -->
 <section id="testArea" class="hidden">
  <div class="card">
   <h2 id="testHeading">Online Test</h2>
@@ -146,34 +114,24 @@ td,th{padding:10px;border-bottom:1px solid #ddd;text-align:left}
  </div>
 </section>
 
-<!-- TEACHER DASHBOARD -->
 <section id="teacherDashboard" class="hidden">
  <div class="card">
-  <h2>👨‍🏫 Teacher Dashboard</h2>
-  <p id="teacherWelcome"></p>
+  <h2>👨‍🏫 Teacher Dashboard</h2><p id="teacherWelcome"></p>
   <h3>Create New Test</h3>
-
-  <label>Test Name</label>
-  <input id="testName" placeholder="Example: Mathematics Test">
-
+  <label>Test Name</label><input id="testName" placeholder="Example: Mathematics Test">
   <label>Class</label>
   <select id="testClass">
    <option value="">Select Class</option>
-   <script>
-    for(let i=1;i<=12;i++)
-      document.write(`<option value="${i}">Class ${i}</option>`);
-   </script>
+   <option value="1">Class 1</option><option value="2">Class 2</option>
+   <option value="3">Class 3</option><option value="4">Class 4</option>
+   <option value="5">Class 5</option><option value="6">Class 6</option>
+   <option value="7">Class 7</option><option value="8">Class 8</option>
+   <option value="9">Class 9</option><option value="10">Class 10</option>
+   <option value="11">Class 11</option><option value="12">Class 12</option>
   </select>
-
-  <label>Subject</label>
-  <input id="testSubject" placeholder="Hindi / English / Mathematics / Science etc.">
-
-  <label>Time Limit (minutes)</label>
-  <input id="testTime" type="number" min="1" value="30">
-
-  <hr>
-  <h3>Add Questions (Maximum 50)</h3>
-
+  <label>Subject</label><input id="testSubject" placeholder="Hindi / English / Mathematics / Science etc.">
+  <label>Time Limit (minutes)</label><input id="testTime" type="number" min="1" value="30">
+  <hr><h3>Add Questions (Maximum 50)</h3>
   <label>Question Type</label>
   <select id="questionType" onchange="updateQuestionHelp()">
    <option value="mcq">MCQ - One Correct Answer</option>
@@ -181,99 +139,20 @@ td,th{padding:10px;border-bottom:1px solid #ddd;text-align:left}
    <option value="blank">Fill in the Blank</option>
    <option value="matching">Matching</option>
   </select>
-
-  <label>Question</label>
-  <textarea id="questionText" placeholder="Write your question here"></textarea>
-
-  <label>Options / Matching Pairs</label>
-  <textarea id="questionOptions" placeholder="Write one option per line. For matching, write Left = Right on each line."></textarea>
-
-  <label>Correct Answer</label>
-  <textarea id="questionAnswer" placeholder="MCQ: exact option text&#10;Multiple: one correct option per line&#10;Blank: correct answer&#10;Matching: Left=Right | Left2=Right2"></textarea>
-
-  <p class="small" id="questionHelp">
-   MCQ: options on separate lines. Correct answer must match one option exactly.
-  </p>
-
+  <label>Question</label><textarea id="questionText" placeholder="Write your question here"></textarea>
+  <label>Options / Matching Pairs</label><textarea id="questionOptions" placeholder="One option per line. Matching: Left = Right on each line."></textarea>
+  <label>Correct Answer</label><textarea id="questionAnswer" placeholder="MCQ: exact option text&#10;Multiple: one correct option per line&#10;Blank: correct answer"></textarea>
+  <p class="small" id="questionHelp">MCQ: options on separate lines. Correct answer must exactly match one option.</p>
   <button onclick="addQuestion()">+ Add Question</button>
-
-  <p id="questionCount">Questions added: 0 / 50</p>
-  <div id="questionPreview"></div>
-
+  <p id="questionCount">Questions added: 0 / 50</p><div id="questionPreview"></div>
   <button onclick="publishTest()">Publish Test</button>
-  <h3>My Published Tests</h3>
-  <div id="teacherTests"></div>
+  <h3>My Published Tests</h3><div id="teacherTests"></div>
  </div>
 </section>
 
-<!-- ADMIN DASHBOARD -->
-
-<div class="card">
-  <h2>👨‍🏫 Teacher Account Management</h2>
-
-  <input
-    type="text"
-    id="teacherName"
-    placeholder="Enter Teacher Name"
-  >
-
-  <input
-    type="email"
-    id="teacherEmail"
-    placeholder="Enter Teacher Email"
-  >
-
-  <input
-    type="password"
-    id="teacherPassword"
-    placeholder="Set Temporary Password"
-  >
-
-  <button onclick="createTeacherAccount()">
-    Create Teacher Account
-  </button>
-
-  <p id="teacherMessage"></p>
-
-  <hr>
-
-  <h3>Registered Teachers</h3>
-  <div id="teacherList">
-    No teacher records loaded.
-  </div>
-</div>
- 
- 
- 
- <section id="adminDashboard" class="hidden">
+<section id="adminDashboard" class="hidden">
  <div class="card">
-  <h2>🛡️ Admin Control Room</h2><!-- TEACHER ACCOUNT MANAGEMENT -->
-<div class="card">
-  <h2>👨‍🏫 Teacher Account Management</h2>
-
-  <label>Teacher Name</label>
-  <input type="text" id="teacherName"
-  placeholder="Enter Teacher Name">
-
-  <label>Teacher Email</label>
-  <input type="email" id="teacherEmail"
-  placeholder="Enter Teacher Email">
-
-  <button onclick="createTeacherAccount()">
-    Create Teacher Account
-  </button>
-
-  <p id="teacherMessage"></p>
-
-  <hr>
-
-  <h3>Registered Teachers</h3>
-  <div id="teacherList">
-    Loading Teachers...
-  </div>
-</div>
-  
-  <p>Platform Monitoring</p>
+  <h2>🛡️ Admin Control Room</h2><p>Platform Monitoring</p>
   <div class="grid">
    <div class="card"><h3>Students</h3><h2 id="studentCount">0</h2></div>
    <div class="card"><h3>Teachers</h3><h2 id="teacherCount">0</h2></div>
@@ -283,737 +162,486 @@ td,th{padding:10px;border-bottom:1px solid #ddd;text-align:left}
  </div>
 
  <div class="card">
-  <h3>All Tests</h3>
-  <div id="adminTests"></div>
+  <h2>👨‍🏫 Teacher Account Management</h2>
+  <p class="small">Enter the teacher's name and email. The teacher will create their own password using the invitation email address.</p>
+  <label>Teacher Name</label><input type="text" id="teacherName" placeholder="Enter Teacher Name">
+  <label>Teacher Email</label><input type="email" id="teacherEmail" placeholder="Enter Teacher Email">
+  <button onclick="createTeacherAccount()">Send Teacher Invitation</button>
+  <p id="teacherMessage"></p><hr>
+  <h3>Registered / Invited Teachers</h3><div id="teacherList">Loading teachers...</div>
  </div>
 
- <div class="card">
-  <h3>Student Results Monitoring</h3>
-  <div id="adminResults"></div>
- </div>
-
- <div class="card">
-  <h3>Registered Users</h3>
-  <div id="adminUsers"></div>
- </div>
+ <div class="card"><h3>All Tests</h3><div id="adminTests"></div></div>
+ <div class="card"><h3>Student Results Monitoring</h3><div id="adminResults"></div></div>
+ <div class="card"><h3>Registered Users</h3><div id="adminUsers"></div></div>
 </section>
-
 </div>
 
-<!-- FIREBASE SDK -->
+<footer>
+ <h3>ExamRocket 🚀</h3><p>Online Test & Learning Platform</p>
+ <p>📞 <a href="tel:+919341905013">+91 9341905013</a></p>
+ <p>✉️ <a href="mailto:yadavashu1317@gmail.com">yadavashu1317@gmail.com</a></p>
+ <p>© 2026 ExamRocket. All Rights Reserved.</p>
+</footer>
+
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-
-<script>
-
-// ====================================
-// 1. FIREBASE CONFIGURATION
-// ====================================
-
- // For Firebase JS SDK v7.20.0 and later, measurementId is optional
- 
+<script>// 1. FIREBASE CONFIGURATION
 const firebaseConfig = {
-  apiKey: "AIzaSyC2I5Qb8Mr3FHVD_yZ-ztPEHJuoaDQWcMQ",
-  authDomain: "examrocket-88376.firebaseapp.com",
-  projectId: "examrocket-88376",
-  storageBucket: "examrocket-88376.firebasestorage.app",
-  messagingSenderId: "798285215184",
-  appId: "1:798285215184:web:11be1ff331b97c9d2c35d5",
-  measurementId: "G-YFF56HW6YM"
+ apiKey:"AIzaSyC2I5Qb8Mr3FHVD_yZ-ztPEHJuoaDQWcMQ",
+ authDomain:"examrocket-88376.firebaseapp.com",
+ projectId:"examrocket-88376",
+ storageBucket:"examrocket-88376.firebasestorage.app",
+ messagingSenderId:"798285215184",
+ appId:"1:798285215184:web:11be1ff331b97c9d2c35d5",
+ measurementId:"G-YFF56HW6YM"
 };
-
 firebase.initializeApp(firebaseConfig);
+const auth=firebase.auth();
+const db=firebase.firestore();
 
-const auth = firebase.auth();
-const db = firebase.firestore();
+let currentUser=null,currentRole=null,authMode="student";
+let questionList=[],activeTest=null,activeTestId=null,activeQuestions=[];
 
-let currentUser = null;
-let currentRole = null;
-let authMode = "student";
-let questionList = [];
-let activeTest = null;
-let activeTestId = null;
-let activeQuestions = [];
-
-// ====================================
 // 2. COMMON FUNCTIONS
-// ====================================
-
 function showMessage(text){
  const box=document.getElementById("message");
- box.textContent=text;
- box.classList.remove("hidden");
- window.scrollTo(0,0);
+ box.textContent=text;box.classList.remove("hidden");window.scrollTo(0,0);
 }
-
+function clearMessage(){document.getElementById("message").classList.add("hidden");}
 function hideAll(){
- ["home","auth","studentDashboard","teacherDashboard",
- "adminDashboard","testArea"].forEach(id=>{
-  document.getElementById(id).classList.add("hidden");
- });
+ ["home","auth","studentDashboard","teacherDashboard","adminDashboard","testArea"]
+ .forEach(id=>document.getElementById(id).classList.add("hidden"));
 }
-
-function showHome(){
- hideAll();
- document.getElementById("home").classList.remove("hidden");
-}
-
+function showHome(){hideAll();clearMessage();document.getElementById("home").classList.remove("hidden");}
 function showAuth(role){
- hideAll();
- authMode=role;
+ hideAll();clearMessage();authMode=role;
  document.getElementById("auth").classList.remove("hidden");
- document.getElementById("authTitle").textContent=role+" Login";
+ document.getElementById("authTitle").textContent=role==="admin"?"Office / Admin Login":role+" Login";
  document.getElementById("signupFields").classList.add("hidden");
  document.getElementById("signupControls").classList.add("hidden");
-
- const isStudent=role==="student";
- document.getElementById("studentSignupLink").classList.toggle("hidden",!isStudent);
+ document.getElementById("studentSignupLink").classList.toggle("hidden",role!=="student");
+ document.getElementById("teacherSignupLink").classList.toggle("hidden",role!=="teacher");
 }
-
 function showSignup(){
+ if(authMode!=="student" && authMode!=="teacher")return;
  document.getElementById("signupFields").classList.remove("hidden");
  document.getElementById("signupControls").classList.remove("hidden");
- document.getElementById("authTitle").textContent="Student Registration";
+ document.getElementById("authTitle").textContent=authMode==="student"?"Student Registration":"Teacher Registration";
+ document.getElementById("signupButton").textContent=authMode==="student"?"Create Student Account":"Complete Teacher Registration";
 }
+function cleanEmail(){return document.getElementById("email").value.trim().toLowerCase();}
 
-function cleanEmail(){
- return document.getElementById("email").value.trim().toLowerCase();
-}
+// 3. STUDENT / INVITED TEACHER REGISTRATION
+async function registerAccount(){
+ try{
+  const name=document.getElementById("signupName").value.trim();
+  const email=cleanEmail();
+  const password=document.getElementById("password").value;
+  if(!name||!email||password.length<6)return showMessage("Enter name, valid email and password of at least 6 characters.");
 
-// ====================================
-// 3. STUDENT SIGNUP
-// ====================================
+  if(authMode==="teacher"){
+   const inviteRef=db.collection("teacherInvites").doc(email);
+   const invite=await inviteRef.get();
+   if(!invite.exists || invite.data().status!=="pending")
+    return showMessage("No pending invitation found for this email. Contact Admin.");
+   if((invite.data().name||"").trim().toLowerCase()!==name.toLowerCase())
+    return showMessage("Name does not match the Admin invitation. Contact Admin.");
+  }
 
-async function signupStudent(){
+  const result=await auth.createUserWithEmailAndPassword(email,password);
+  const role=authMode;
+  await db.collection("users").doc(result.user.uid).set({
+   name,email,role,createdAt:firebase.firestore.FieldValue.serverTimestamp()
+  });
+ async function registerAccount(){
+ let newUser=null;
+
  try{
   const name=document.getElementById("signupName").value.trim();
   const email=cleanEmail();
   const password=document.getElementById("password").value;
 
-  if(!name || !email || password.length<6){
-   return showMessage("Enter your name, valid email and password of at least 6 characters.");
+  if(!name||!email||password.length<6){
+   return showMessage("Enter name, valid email and password of at least 6 characters.");
   }
 
+  // Create the account first so the invited email can be checked securely.
   const result=await auth.createUserWithEmailAndPassword(email,password);
+  newUser=result.user;
 
-  await db.collection("users").doc(result.user.uid).set({
+  if(authMode==="teacher"){
+   const inviteRef=db.collection("teacherInvites").doc(email);
+   const invite=await inviteRef.get();
+
+   if(!invite.exists || invite.data().status!=="pending"){
+    await newUser.delete();
+    await auth.signOut();
+    return showMessage("No pending invitation found for this email. Contact Admin.");
+   }
+
+   if((invite.data().name||"").trim().toLowerCase()!==name.toLowerCase()){
+    await newUser.delete();
+    await auth.signOut();
+    return showMessage("Name does not match the Admin invitation. Contact Admin.");
+   }
+  }
+
+  const role=authMode;
+
+  await db.collection("users").doc(newUser.uid).set({
    name:name,
    email:email,
-   role:"student",
+   role:role,
    createdAt:firebase.firestore.FieldValue.serverTimestamp()
   });
 
-  currentUser=result.user;
-  currentRole="student";
-  showStudentDashboard();
+  currentUser=newUser;
+  currentRole=role;
+
+  if(role==="student")await showStudentDashboard();
+  else await showTeacherDashboard();
 
  }catch(e){
   showMessage(e.message);
  }
 }
+  currentUser=result.user;currentRole=role;
+  if(role==="student")await showStudentDashboard();
+  else await showTeacherDashboard();
+ }catch(e){showMessage(e.message);}
+}
 
-// ====================================
 // 4. LOGIN
-// ====================================
-
-async function login(){// CREATE TEACHER ACCOUNT
-async function createTeacherAccount() {
-  try {
-    if (currentRole !== "admin") {
-      return alert("Only Admin can create teacher accounts.");
-    }
-
-    const name = document.getElementById("teacherName").value.trim();
-    const email = document.getElementById("teacherEmail").value.trim().toLowerCase();
-    const message = document.getElementById("teacherMessage");
-
-    if (!name || !email) {
-      return message.innerText = "Enter teacher name and email.";
-    }
-
-    const invite = await db.collection("teacherInvites").doc(email).get();
-
-    if (invite.exists) {
-      return message.innerText = "Teacher invitation already exists.";
-    }
-
-    await db.collection("teacherInvites").doc(email).set({
-      name: name,
-      email: email,
-      role: "teacher",
-      status: "pending",
-      createdAt: firebase.firestore.FieldValue.serverTimestamp()
-    });
-
-    message.innerText = "Teacher invitation created successfully!";
-
-    document.getElementById("teacherName").value = "";
-    document.getElementById("teacherEmail").value = "";
-
-  } catch (error) {
-    document.getElementById("teacherMessage").innerText = error.message;
-  }
-}
+async function login(){
  try{
-  const email=cleanEmail();
-  const password=document.getElementById("password").value;
-
-  if(!email || !password)
-   return showMessage("Enter email and password.");
-
+  const email=cleanEmail(),password=document.getElementById("password").value;
+  if(!email||!password)return showMessage("Enter email and password.");
   const result=await auth.signInWithEmailAndPassword(email,password);
-  const doc=await db.collection("users").doc(result.user.uid).get();
-
-  if(!doc.exists){
-   await auth.signOut();
-   return showMessage("Your account is not authorised. Contact Admin.");
-  }
-
-  const user=doc.data();
-
-  if(user.role!==authMode){
-   await auth.signOut();
-   return showMessage("Invalid login portal for this account.");
-  }
-
-  currentUser=result.user;
-  currentRole=user.role;
-
-  if(currentRole==="student") showStudentDashboard();
-  if(currentRole==="teacher") showTeacherDashboard();
-  if(currentRole==="admin") showAdminDashboard();
-
- }catch(e){
-  showMessage(e.message);
- }
+  const userDoc=await db.collection("users").doc(result.user.uid).get();
+  if(!userDoc.exists){await auth.signOut();return showMessage("Your account is not authorised. Contact Admin.");}
+  const user=userDoc.data();
+  if(user.role!==authMode){await auth.signOut();return showMessage("Invalid login portal for this account.");}
+  currentUser=result.user;currentRole=user.role;
+  if(currentRole==="student")await showStudentDashboard();
+  if(currentRole==="teacher")await showTeacherDashboard();
+  if(currentRole==="admin")await showAdminDashboard();
+ }catch(e){showMessage(e.message);}
 }
 
-// ====================================
-// 5. AUTH STATE
-// ====================================
+// 5. ADMIN INVITES A TEACHER
+async function createTeacherAccount(){
+ const message=document.getElementById("teacherMessage");
+ try{
+  if(!auth.currentUser || currentRole!=="admin"){
+   message.textContent="Only a logged-in Admin can send teacher invitations.";return;
+  }
+  const name=document.getElementById("teacherName").value.trim();
+  const email=document.getElementById("teacherEmail").value.trim().toLowerCase();
+  if(!name||!email){message.textContent="Enter teacher name and email.";return;}
+  const existing=await db.collection("teacherInvites").doc(email).get();
+  if(existing.exists && existing.data().status!=="cancelled"){
+   message.textContent="An invitation already exists for this email.";return;
+  }
+  await db.collection("teacherInvites").doc(email).set({
+   name,email,role:"teacher",status:"pending",
+   createdAt:firebase.firestore.FieldValue.serverTimestamp()
+  });
+  message.textContent="Invitation saved. Ask the teacher to open Teacher Login, choose Complete teacher registration, and use this exact name and email.";
+  document.getElementById("teacherName").value="";
+  document.getElementById("teacherEmail").value="";
+  await loadTeacherList();
+ }catch(e){message.textContent=e.message;}
+}
 
+// 6. AUTH STATE AND LOGOUT
 auth.onAuthStateChanged(async user=>{
  currentUser=user;
- if(!user)return;
-
+ if(!user){currentRole=null;return;}
  try{
   const doc=await db.collection("users").doc(user.uid).get();
-  if(!doc.exists)return;
-  currentRole=doc.data().role;
- }catch(e){
-  console.error(e);
- }
+  currentRole=doc.exists?doc.data().role:null;
+ }catch(e){console.error(e);}
 });
-
 async function logout(){
- try{
-  await auth.signOut();
-  currentUser=null;
-  currentRole=null;
-  showHome();
-  showMessage("You have logged out.");
- }catch(e){
-  showMessage(e.message);
- }
+ try{await auth.signOut();currentUser=null;currentRole=null;showHome();showMessage("You have logged out.");}
+ catch(e){showMessage(e.message);}
 }
 
-// ====================================
-// 6. STUDENT DASHBOARD
-// ====================================
-
+// 7. STUDENT DASHBOARD
 async function showStudentDashboard(){
- hideAll();
- document.getElementById("studentDashboard").classList.remove("hidden");
-
+ hideAll();document.getElementById("studentDashboard").classList.remove("hidden");
  const userDoc=await db.collection("users").doc(currentUser.uid).get();
- document.getElementById("studentWelcome").textContent=
- "Welcome, "+(userDoc.data().name||"Student");
-
- await loadAvailableTests();
- await loadMyResults();
+ document.getElementById("studentWelcome").textContent="Welcome, "+(userDoc.data().name||"Student");
+ await loadAvailableTests();await loadMyResults();
 }
-
 async function loadAvailableTests(){
- const box=document.getElementById("availableTests");
- box.innerHTML="Loading...";
-
+ const box=document.getElementById("availableTests");box.textContent="Loading...";
  try{
-  const snap=await db.collection("tests")
-   .where("status","==","published").get();
-
+  const snap=await db.collection("tests").where("status","==","published").get();
   box.innerHTML="";
-
-  if(snap.empty){
-   box.textContent="No tests available yet.";
-   return;
-  }
-
+  if(snap.empty){box.textContent="No tests available yet.";return;}
   snap.forEach(doc=>{
-   const t=doc.data();
-   const div=document.createElement("div");
-   div.className="question";
-   const heading=document.createElement("h3");
-   heading.textContent=t.title;
-   const detail=document.createElement("p");
-   detail.textContent="Class "+t.class+" | "+t.subject+" | "+t.questions.length+" Questions";
-   const btn=document.createElement("button");
-   btn.textContent="Start Test";
-   btn.onclick=()=>startTest(doc.id);
-   div.append(heading,detail,btn);
-   box.appendChild(div);
+   const t=doc.data(),div=document.createElement("div");div.className="question";
+   const h=document.createElement("h3");h.textContent=t.title;
+   const p=document.createElement("p");p.textContent="Class "+t.class+" | "+t.subject+" | "+t.questions.length+" Questions";
+   const b=document.createElement("button");b.textContent="Start Test";b.onclick=()=>startTest(doc.id);
+   div.append(h,p,b);box.appendChild(div);
   });
-
- }catch(e){
-  box.textContent=e.message;
- }
+ }catch(e){box.textContent=e.message;}
 }
 
-// ====================================
-// 7. TEACHER DASHBOARD
-// ====================================
-
+// 8. TEACHER DASHBOARD AND QUESTION BUILDER
 async function showTeacherDashboard(){
- hideAll();
- document.getElementById("teacherDashboard").classList.remove("hidden");
-
+ hideAll();document.getElementById("teacherDashboard").classList.remove("hidden");
  const doc=await db.collection("users").doc(currentUser.uid).get();
- document.getElementById("teacherWelcome").textContent=
- "Welcome, "+(doc.data().name||"Teacher");
-
+ document.getElementById("teacherWelcome").textContent="Welcome, "+(doc.data().name||"Teacher");
  await loadTeacherTests();
 }
-
 function updateQuestionHelp(){
  const type=document.getElementById("questionType").value;
- const help=document.getElementById("questionHelp");
-
  const messages={
   mcq:"MCQ: Put one option on each line. Correct answer must exactly match one option.",
-  multiple:"Multiple: Put one option on each line and every correct option on a separate answer line.",
+  multiple:"Multiple: Put one option per line and every correct option on a separate answer line.",
   blank:"Fill in the Blank: Write the correct answer in the Correct Answer field.",
-  matching:"Matching: In Options write one pair per line, such as India = Delhi. Students will match both sides."
+  matching:"Matching: In Options write one pair per line, such as India = Delhi."
  };
-
- help.textContent=messages[type];
+ document.getElementById("questionHelp").textContent=messages[type];
 }
-
 function addQuestion(){
  const type=document.getElementById("questionType").value;
  const question=document.getElementById("questionText").value.trim();
  const rawOptions=document.getElementById("questionOptions").value.trim();
  const rawAnswer=document.getElementById("questionAnswer").value.trim();
+ if(questionList.length>=50)return showMessage("Maximum 50 questions allowed.");
+ if(!question)return showMessage("Please write the question.");
+ const q={type,question,options:[],answer:rawAnswer,pairs:[]};
 
- if(questionList.length>=50)
-  return showMessage("Maximum 50 questions allowed.");
-
- if(!question)
-  return showMessage("Please write the question.");
-
- let q={
-  type:type,
-  question:question,
-  options:[],
-  answer:rawAnswer,
-  pairs:[]
- };
-
- if(type==="mcq" || type==="multiple"){
+ if(type==="mcq"||type==="multiple"){
   q.options=rawOptions.split("\n").map(x=>x.trim()).filter(Boolean);
-  if(q.options.length<2)
-   return showMessage("Enter at least two options.");
-  if(!rawAnswer)
-   return showMessage("Enter the correct answer.");
-  const answers=type==="multiple"
-   ?rawAnswer.split("\n").map(x=>x.trim()).filter(Boolean)
-   :[rawAnswer];
-  if(answers.some(a=>!q.options.includes(a)))
-   return showMessage("Correct answer must match the options exactly.");
+  if(q.options.length<2)return showMessage("Enter at least two options.");
+  if(!rawAnswer)return showMessage("Enter the correct answer.");
+  const answers=type==="multiple"?rawAnswer.split("\n").map(x=>x.trim()).filter(Boolean):[rawAnswer];
+  if(answers.some(a=>!q.options.includes(a)))return showMessage("Correct answer must match the options exactly.");
  }
-
- if(type==="blank" && !rawAnswer)
-  return showMessage("Enter the correct answer.");
-
+ if(type==="blank"&&!rawAnswer)return showMessage("Enter the correct answer.");
  if(type==="matching"){
   q.pairs=rawOptions.split("\n").map(line=>{
-   const parts=line.split("=");
-   return parts.length>=2
-    ?{left:parts[0].trim(),right:parts.slice(1).join("=").trim()}
-    :null;
-  }).filter(p=>p && p.left && p.right);
-
-  if(q.pairs.length<2)
-   return showMessage("Enter at least two matching pairs using Left = Right.");
+   const parts=line.split("=");return parts.length>=2?{left:parts[0].trim(),right:parts.slice(1).join("=").trim()}:null;
+  }).filter(p=>p&&p.left&&p.right);
+  if(q.pairs.length<2)return showMessage("Enter at least two matching pairs using Left = Right.");
  }
-
  questionList.push(q);
-
  document.getElementById("questionText").value="";
  document.getElementById("questionOptions").value="";
  document.getElementById("questionAnswer").value="";
-
- document.getElementById("questionCount").textContent=
- "Questions added: "+questionList.length+" / 50";
-
- const preview=document.getElementById("questionPreview");
- const item=document.createElement("div");
- item.className="question";
+ document.getElementById("questionCount").textContent="Questions added: "+questionList.length+" / 50";
+ const item=document.createElement("div");item.className="question";
  item.textContent=questionList.length+". "+question+" ("+type+")";
- preview.appendChild(item);
-
+ document.getElementById("questionPreview").appendChild(item);
  showMessage("Question added successfully.");
 }
-
-// ====================================
-// 8. PUBLISH TEST
-// ====================================
-
+ // 9. PUBLISH AND LOAD TEACHER TESTS
 async function publishTest(){
  try{
+  if(currentRole!=="teacher")return showMessage("Only teachers can publish tests.");
   const title=document.getElementById("testName").value.trim();
   const cls=document.getElementById("testClass").value;
   const subject=document.getElementById("testSubject").value.trim();
   const time=Number(document.getElementById("testTime").value);
-
-  if(!title || !cls || !subject || time<1)
-   return showMessage("Enter test name, class, subject and valid time.");
-
-  if(questionList.length===0)
-   return showMessage("Add at least one question.");
-
-  if(questionList.length>50)
-   return showMessage("Maximum 50 questions allowed.");
-
+  if(!title||!cls||!subject||!Number.isFinite(time)||time<1)return showMessage("Enter test name, class, subject and valid time.");
+  if(questionList.length===0)return showMessage("Add at least one question.");
   await db.collection("tests").add({
-   title:title,
-   class:cls,
-   subject:subject,
-   timeLimit:time,
-   questions:questionList,
-   teacherId:currentUser.uid,
-   status:"published",
+   title,class:cls,subject,timeLimit:time,questions:questionList,
+   teacherId:currentUser.uid,status:"published",
    createdAt:firebase.firestore.FieldValue.serverTimestamp()
   });
-
   questionList=[];
   document.getElementById("questionPreview").innerHTML="";
   document.getElementById("questionCount").textContent="Questions added: 0 / 50";
   document.getElementById("testName").value="";
   document.getElementById("testSubject").value="";
-
-  showMessage("Test published successfully!");
-  await loadTeacherTests();
-
- }catch(e){
-  showMessage(e.message);
- }
+  showMessage("Test published successfully!");await loadTeacherTests();
+ }catch(e){showMessage(e.message);}
 }
-
 async function loadTeacherTests(){
- const box=document.getElementById("teacherTests");
- box.innerHTML="Loading...";
-
+ const box=document.getElementById("teacherTests");box.textContent="Loading...";
  try{
-  const snap=await db.collection("tests")
-   .where("teacherId","==",currentUser.uid).get();
-
+  const snap=await db.collection("tests").where("teacherId","==",currentUser.uid).get();
   box.innerHTML="";
-  if(snap.empty){
-   box.textContent="You have not published any tests.";
-   return;
-  }
-
+  if(snap.empty){box.textContent="You have not published any tests.";return;}
   snap.forEach(doc=>{
-   const t=doc.data();
-   const div=document.createElement("div");
-   div.className="question";
+   const t=doc.data(),div=document.createElement("div");div.className="question";
    div.textContent=t.title+" | Class "+t.class+" | "+t.subject+" | "+t.questions.length+" Questions";
    box.appendChild(div);
   });
  }catch(e){box.textContent=e.message;}
 }
 
-// ====================================
-// 9. STUDENT TEST SYSTEM
-// ====================================
-
+// 10. STUDENT TEST ATTEMPT
 async function startTest(id){
  try{
   const doc=await db.collection("tests").doc(id).get();
   if(!doc.exists)return showMessage("Test not found.");
-
-  activeTest=doc.data();
-  activeTestId=id;
-  activeQuestions=activeTest.questions;
-
-  hideAll();
-  document.getElementById("testArea").classList.remove("hidden");
-  document.getElementById("testHeading").textContent=
-   activeTest.title+" — Class "+activeTest.class;
-
-  const box=document.getElementById("testQuestions");
-  box.innerHTML="";
-
+  activeTest=doc.data();activeTestId=id;activeQuestions=activeTest.questions||[];
+  if(activeTest.status!=="published")return showMessage("This test is not available.");
+  hideAll();document.getElementById("testArea").classList.remove("hidden");
+  document.getElementById("testHeading").textContent=activeTest.title+" — Class "+activeTest.class;
+  const box=document.getElementById("testQuestions");box.innerHTML="";
   activeQuestions.forEach((q,index)=>{
-   const div=document.createElement("div");
-   div.className="question";
-
-   const title=document.createElement("h3");
-   title.textContent=(index+1)+". "+q.question;
-   div.appendChild(title);
-
-   if(q.type==="mcq" || q.type==="multiple"){
-    q.options.forEach((option,i)=>{
-     const label=document.createElement("label");
-     label.className="option";
-     const input=document.createElement("input");
-     input.type=q.type==="multiple"?"checkbox":"radio";
-     input.name="q"+index;
-     input.value=option;
-     input.style.width="auto";
-     label.append(input,document.createTextNode(" "+option));
-     div.appendChild(label);
+   const div=document.createElement("div");div.className="question";
+   const title=document.createElement("h3");title.textContent=(index+1)+". "+q.question;div.appendChild(title);
+   if(q.type==="mcq"||q.type==="multiple"){
+    (q.options||[]).forEach(option=>{
+     const label=document.createElement("label");label.className="option";
+     const input=document.createElement("input");input.type=q.type==="multiple"?"checkbox":"radio";
+     input.name="q"+index;input.value=option;input.style.width="auto";
+     label.append(input,document.createTextNode(" "+option));div.appendChild(label);
     });
    }
-
    if(q.type==="blank"){
-    const input=document.createElement("input");
-    input.placeholder="Write your answer";
-    input.id="answer"+index;
-    div.appendChild(input);
+    const input=document.createElement("input");input.placeholder="Write your answer";input.id="answer"+index;div.appendChild(input);
    }
-
    if(q.type==="matching"){
-    const rights=q.pairs.map(p=>p.right);
-    q.pairs.forEach((pair,j)=>{
-     const label=document.createElement("label");
-     label.className="option";
-     label.textContent=pair.left+" → ";
-     const select=document.createElement("select");
-     select.id="match"+index+"_"+j;
-
-     const empty=document.createElement("option");
-     empty.value="";
-     empty.textContent="Select match";
-     select.appendChild(empty);
-
+    const rights=(q.pairs||[]).map(p=>p.right);
+    (q.pairs||[]).forEach((pair,j)=>{
+     const label=document.createElement("label");label.className="option";label.appendChild(document.createTextNode(pair.left+" → "));
+     const select=document.createElement("select");select.id="match"+index+"_"+j;
+     const empty=document.createElement("option");empty.value="";empty.textContent="Select match";select.appendChild(empty);
      [...rights].sort(()=>Math.random()-.5).forEach(right=>{
-      const opt=document.createElement("option");
-      opt.value=right;
-      opt.textContent=right;
-      select.appendChild(opt);
+      const opt=document.createElement("option");opt.value=right;opt.textContent=right;select.appendChild(opt);
      });
-
-     label.appendChild(select);
-     div.appendChild(label);
+     label.appendChild(select);div.appendChild(label);
     });
    }
-
    box.appendChild(div);
   });
-
  }catch(e){showMessage(e.message);}
 }
-
 function getStudentAnswer(q,index){
  if(q.type==="mcq"){
-  const selected=document.querySelector('input[name="q'+index+'"]:checked');
-  return selected?selected.value:"";
+  const selected=document.querySelector('input[name="q'+index+'"]:checked');return selected?selected.value:"";
  }
-
- if(q.type==="multiple"){
-  return [...document.querySelectorAll('input[name="q'+index+'"]:checked')]
-   .map(x=>x.value).sort();
- }
-
- if(q.type==="blank"){
-  return document.getElementById("answer"+index).value.trim();
- }
-
- if(q.type==="matching"){
-  return q.pairs.map((p,j)=>({
-   left:p.left,
-   right:document.getElementById("match"+index+"_"+j).value
-  }));
- }
+ if(q.type==="multiple")return [...document.querySelectorAll('input[name="q'+index+'"]:checked')].map(x=>x.value).sort();
+ if(q.type==="blank")return document.getElementById("answer"+index).value.trim();
+ if(q.type==="matching")return q.pairs.map((p,j)=>({left:p.left,right:document.getElementById("match"+index+"_"+j).value}));
+ return null;
 }
-
 function isCorrect(q,answer){
- if(q.type==="mcq")
-  return answer===q.answer;
-
+ if(q.type==="mcq")return answer===q.answer;
  if(q.type==="multiple"){
   const correct=q.answer.split("\n").map(x=>x.trim()).filter(Boolean).sort();
   return JSON.stringify(answer)===JSON.stringify(correct);
  }
-
- if(q.type==="blank")
-  return answer.toLowerCase()===q.answer.trim().toLowerCase();
-
- if(q.type==="matching")
-  return answer.every(a=>{
-   const correct=q.pairs.find(p=>p.left===a.left);
-   return correct && correct.right===a.right;
-  }) && answer.length===q.pairs.length;
+ if(q.type==="blank")return String(answer||"").trim().toLowerCase()===q.answer.trim().toLowerCase();
+ if(q.type==="matching")return answer.every(a=>{const correct=q.pairs.find(p=>p.left===a.left);return correct&&correct.right===a.right;})&&answer.length===q.pairs.length;
+ return false;
 }
-
 async function submitTest(){
+ if(!activeQuestions.length)return showMessage("There are no questions in this test.");
  if(!confirm("Are you sure you want to submit this test?"))return;
-
  try{
-  let score=0;
-  let details=[];
-
+  let score=0;const details=[];
   activeQuestions.forEach((q,index)=>{
-   const answer=getStudentAnswer(q,index);
-   const correct=isCorrect(q,answer);
+   const answer=getStudentAnswer(q,index),correct=isCorrect(q,answer);
    if(correct)score++;
-
-   details.push({
-    question:q.question,
-    type:q.type,
-    answer:answer,
-    correct:correct
-   });
+   details.push({question:q.question,type:q.type,answer,correct});
   });
-
-  const total=activeQuestions.length;
-  const percentage=(score/total)*100;
-
+  const total=activeQuestions.length,percentage=(score/total)*100;
   await db.collection("results").add({
-   studentId:currentUser.uid,
-   studentEmail:currentUser.email,
-   testId:activeTestId,
-   testTitle:activeTest.title,
-   class:activeTest.class,
-   subject:activeTest.subject,
-   score:score,
-   total:total,
-   percentage:percentage,
-   details:details,
+   studentId:currentUser.uid,studentEmail:currentUser.email,
+   testId:activeTestId,testTitle:activeTest.title,class:activeTest.class,
+   subject:activeTest.subject,score,total,percentage,details,
    submittedAt:firebase.firestore.FieldValue.serverTimestamp()
   });
-
-  hideAll();
-  document.getElementById("studentDashboard").classList.remove("hidden");
-
-  const box=document.getElementById("myResults");
-  box.innerHTML=
-   "<h2>Test Submitted Successfully!</h2>"+
-   "<h3>Score: "+score+" / "+total+"</h3>"+
-   "<h3>Percentage: "+percentage.toFixed(2)+"%</h3>";
-
+  hideAll();document.getElementById("studentDashboard").classList.remove("hidden");
+  document.getElementById("myResults").innerHTML="<h2>Test Submitted Successfully!</h2><h3>Score: "+score+" / "+total+"</h3><h3>Percentage: "+percentage.toFixed(2)+"%</h3>";
   await loadMyResults();
-
  }catch(e){showMessage(e.message);}
 }
+async function backToStudent(){await showStudentDashboard();}
 
-function backToStudent(){
- showStudentDashboard();
-}
-
+// 11. RESULTS
 async function loadMyResults(){
  const box=document.getElementById("myResults");
  try{
-  const snap=await db.collection("results")
-   .where("studentId","==",currentUser.uid).get();
-
+  const snap=await db.collection("results").where("studentId","==",currentUser.uid).get();
   box.innerHTML="";
-  if(snap.empty){
-   box.textContent="No results yet.";
-   return;
-  }
-
+  if(snap.empty){box.textContent="No results yet.";return;}
   snap.forEach(doc=>{
-   const r=doc.data();
-   const div=document.createElement("div");
-   div.className="question";
-   div.textContent=r.testTitle+" | Score: "+r.score+"/"+r.total+
-    " | "+(Number(r.percentage) || 0).toFixed(2)+"%";
+   const r=doc.data(),div=document.createElement("div");div.className="question";
+   div.textContent=r.testTitle+" | Score: "+r.score+"/"+r.total+" | "+(Number(r.percentage)||0).toFixed(2)+"%";
    box.appendChild(div);
   });
  }catch(e){box.textContent=e.message;}
 }
 
-// ====================================
-// 10. ADMIN MONITORING
-// ====================================
-
+// 12. ADMIN DASHBOARD AND TEACHER LIST
 async function showAdminDashboard(){
- hideAll();
- document.getElementById("adminDashboard").classList.remove("hidden");
-
+ if(!auth.currentUser||currentRole!=="admin"){
+  await auth.signOut();currentUser=null;currentRole=null;
+  showHome();showMessage("Admin access only.");return;
+ }
+ hideAll();document.getElementById("adminDashboard").classList.remove("hidden");
  try{
   const [users,tests,results]=await Promise.all([
-   db.collection("users").get(),
-   db.collection("tests").get(),
-   db.collection("results").get()
+   db.collection("users").get(),db.collection("tests").get(),db.collection("results").get()
   ]);
-
   let students=0,teachers=0;
-  const userBox=document.getElementById("adminUsers");
-  userBox.innerHTML="";
-
+  const userBox=document.getElementById("adminUsers");userBox.innerHTML="";
   users.forEach(doc=>{
-   const u=doc.data();
-   if(u.role==="student")students++;
-   if(u.role==="teacher")teachers++;
-
-   const div=document.createElement("div");
-   div.className="question";
-   div.textContent=(u.name||"User")+" | "+u.email+" | "+u.role;
-   userBox.appendChild(div);
+   const u=doc.data();if(u.role==="student")students++;if(u.role==="teacher")teachers++;
+   const div=document.createElement("div");div.className="question";
+   div.textContent=(u.name||"User")+" | "+u.email+" | "+u.role;userBox.appendChild(div);
   });
-
   document.getElementById("studentCount").textContent=students;
   document.getElementById("teacherCount").textContent=teachers;
   document.getElementById("testCount").textContent=tests.size;
   document.getElementById("resultCount").textContent=results.size;
-
-  const testBox=document.getElementById("adminTests");
-  testBox.innerHTML="";
+  const testBox=document.getElementById("adminTests");testBox.innerHTML="";
   tests.forEach(doc=>{
-   const t=doc.data();
-   const div=document.createElement("div");
-   div.className="question";
-   div.textContent=t.title+" | Class "+t.class+" | "+t.subject+
-    " | "+t.questions.length+" Questions | "+t.status;
+   const t=doc.data(),div=document.createElement("div");div.className="question";
+   div.textContent=t.title+" | Class "+t.class+" | "+t.subject+" | "+(t.questions||[]).length+" Questions | "+t.status;
    testBox.appendChild(div);
   });
-
-  const resultBox=document.getElementById("adminResults");
-  resultBox.innerHTML="";
-
+  const resultBox=document.getElementById("adminResults");resultBox.innerHTML="";
   results.forEach(doc=>{
-   const r=doc.data();
-   const div=document.createElement("div");
-   div.className="question";
-   div.textContent=r.studentEmail+" | "+r.testTitle+
-    " | "+r.score+"/"+r.total+" | "+(Number(r.percentage) || 0).toFixed(2)+"%";
+   const r=doc.data(),div=document.createElement("div");div.className="question";
+   div.textContent=r.studentEmail+" | "+r.testTitle+" | "+r.score+"/"+r.total+" | "+(Number(r.percentage)||0).toFixed(2)+"%";
    resultBox.appendChild(div);
   });
-
- }catch(e){showMessage(e.message);}
+  await loadTeacherList();
+ }catch(e){showMessage("Admin dashboard error: "+e.message);}
+}
+async function loadTeacherList(){
+ const box=document.getElementById("teacherList");
+ if(!auth.currentUser||currentRole!=="admin"){box.textContent="Admin login required.";return;}
+ box.textContent="Loading teachers...";
+ try{
+  const [users,invites]=await Promise.all([
+   db.collection("users").where("role","==","teacher").get(),
+   db.collection("teacherInvites").get()
+  ]);
+  box.innerHTML="";
+  if(users.empty&&invites.empty){box.textContent="No teachers or invitations yet.";return;}
+  const seen=new Set();
+  users.forEach(doc=>{
+   const u=doc.data();seen.add((u.email||"").toLowerCase());
+   const div=document.createElement("div");div.className="question";
+   div.textContent=(u.name||"Teacher")+" | "+u.email+" | Registered";box.appendChild(div);
+  });
+  invites.forEach(doc=>{
+   const inv=doc.data();if(seen.has((inv.email||doc.id).toLowerCase()))return;
+   const div=document.createElement("div");div.className="question";
+   div.textContent=(inv.name||"Teacher")+" | "+(inv.email||doc.id)+" | "+(inv.status||"Invited");
+   box.appendChild(div);
+  });
+ }catch(e){box.textContent="Could not load teacher list: "+e.message;}
 }
 
 showHome();
-
 </script>
-<footer style="background:#172554; color:white; text-align:center; padding:25px; margin-top:30px;">
-  <h3>ExamRocket 🚀</h3>
-  <p>Online Test & Learning Platform</p>
-
-  <p>📞 <a href="tel:+919341905013" style="color:white;">
-    +91 9341905013
-  </a></p>
-
-  <p>✉️ <a href="mailto:yadavashu1317@gmail.com" style="color:white;">
-    yadavashu1317@gmail.com
-  </a></p>
-
-  <p>© 2026 ExamRocket. All Rights Reserved.</p>
-</footer>
-
- 
 </body>
 </html>
+ 
