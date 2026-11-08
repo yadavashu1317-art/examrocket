@@ -207,7 +207,7 @@ td,th{padding:10px;border-bottom:1px solid #ddd;text-align:left}
 </section>
 
 <!-- ADMIN DASHBOARD -->
-<!-- TEACHER ACCOUNT MANAGEMENT -->
+
 <div class="card">
   <h2>👨‍🏫 Teacher Account Management</h2>
 
@@ -247,7 +247,32 @@ td,th{padding:10px;border-bottom:1px solid #ddd;text-align:left}
  
  <section id="adminDashboard" class="hidden">
  <div class="card">
-  <h2>🛡️ Admin Control Room</h2>
+  <h2>🛡️ Admin Control Room</h2><!-- TEACHER ACCOUNT MANAGEMENT -->
+<div class="card">
+  <h2>👨‍🏫 Teacher Account Management</h2>
+
+  <label>Teacher Name</label>
+  <input type="text" id="teacherName"
+  placeholder="Enter Teacher Name">
+
+  <label>Teacher Email</label>
+  <input type="email" id="teacherEmail"
+  placeholder="Enter Teacher Email">
+
+  <button onclick="createTeacherAccount()">
+    Create Teacher Account
+  </button>
+
+  <p id="teacherMessage"></p>
+
+  <hr>
+
+  <h3>Registered Teachers</h3>
+  <div id="teacherList">
+    Loading Teachers...
+  </div>
+</div>
+  
   <p>Platform Monitoring</p>
   <div class="grid">
    <div class="card"><h3>Students</h3><h2 id="studentCount">0</h2></div>
