@@ -207,7 +207,45 @@ td,th{padding:10px;border-bottom:1px solid #ddd;text-align:left}
 </section>
 
 <!-- ADMIN DASHBOARD -->
-<section id="adminDashboard" class="hidden">
+<!-- TEACHER ACCOUNT MANAGEMENT -->
+<div class="card">
+  <h2>👨‍🏫 Teacher Account Management</h2>
+
+  <input
+    type="text"
+    id="teacherName"
+    placeholder="Enter Teacher Name"
+  >
+
+  <input
+    type="email"
+    id="teacherEmail"
+    placeholder="Enter Teacher Email"
+  >
+
+  <input
+    type="password"
+    id="teacherPassword"
+    placeholder="Set Temporary Password"
+  >
+
+  <button onclick="createTeacherAccount()">
+    Create Teacher Account
+  </button>
+
+  <p id="teacherMessage"></p>
+
+  <hr>
+
+  <h3>Registered Teachers</h3>
+  <div id="teacherList">
+    No teacher records loaded.
+  </div>
+</div>
+ 
+ 
+ 
+ <section id="adminDashboard" class="hidden">
  <div class="card">
   <h2>🛡️ Admin Control Room</h2>
   <p>Platform Monitoring</p>
@@ -354,7 +392,44 @@ async function signupStudent(){
 // 4. LOGIN
 // ====================================
 
-async function login(){
+async function login(){// CREATE TEACHER ACCOUNT
+async function createTeacherAccount() {
+  try {
+    if (currentRole !== "admin") {
+      return alert("Only Admin can create teacher accounts.");
+    }
+
+    const name = document.getElementById("teacherName").value.trim();
+    const email = document.getElementById("teacherEmail").value.trim().toLowerCase();
+    const message = document.getElementById("teacherMessage");
+
+    if (!name || !email) {
+      return message.innerText = "Enter teacher name and email.";
+    }
+
+    const invite = await db.collection("teacherInvites").doc(email).get();
+
+    if (invite.exists) {
+      return message.innerText = "Teacher invitation already exists.";
+    }
+
+    await db.collection("teacherInvites").doc(email).set({
+      name: name,
+      email: email,
+      role: "teacher",
+      status: "pending",
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+
+    message.innerText = "Teacher invitation created successfully!";
+
+    document.getElementById("teacherName").value = "";
+    document.getElementById("teacherEmail").value = "";
+
+  } catch (error) {
+    document.getElementById("teacherMessage").innerText = error.message;
+  }
+}
  try{
   const email=cleanEmail();
   const password=document.getElementById("password").value;
