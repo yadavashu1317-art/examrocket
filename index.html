@@ -803,7 +803,7 @@ async function loadMyResults(){
    const div=document.createElement("div");
    div.className="question";
    div.textContent=r.testTitle+" | Score: "+r.score+"/"+r.total+
-    " | "+r.percentage.toFixed(2)+"%";
+    " | "+(Number(r.percentage) || 0).toFixed(2)+"%";
    box.appendChild(div);
   });
  }catch(e){box.textContent=e.message;}
