@@ -863,7 +863,7 @@ async function showAdminDashboard(){
    const div=document.createElement("div");
    div.className="question";
    div.textContent=r.studentEmail+" | "+r.testTitle+
-    " | "+r.score+"/"+r.total+" | "+r.percentage.toFixed(2)+"%";
+    " | "+r.score+"/"+r.total+" | "+(Number(r.percentage) || 0).toFixed(2)+"%";
    resultBox.appendChild(div);
   });
 
